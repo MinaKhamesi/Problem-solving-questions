@@ -1,26 +1,17 @@
-class SuffixTrie:
-    def __init__(self, string):
-        self.root = {}
-        self.endSymbol = "*"
-        self.populateSuffixTrieFrom(string)
-
-    def populateSuffixTrieFrom(self, string):
-		
-        for i in reversed(range(len(string))):
-			current = self.root
-			for j in range(i,len(string)):
-				char = string[j]
-				if char not in current:
-					current[char] = {}
-				current = current[char]
-			current[self.endSymbol] = True
-					
-
-    def contains(self, string):
-		current = self.root
-        for char in string:
-			if char not in current:
-				return False
-			current = current[char]
-		return self.endSymbol in current
+def fourNumberSum(array, targetSum):
+	result = []
+	sumsTable = {}
+	for i in range(len(array)):
+		for j in range(i + 1, len(array)):
+			currentSum = array[i] + array[j]
+			neededSum = targetSum - currentSum
+			if neededSum in sumsTable:
+				for num1,num2 in sumsTable[neededSum]:
+					result.append([num1, num2, array[i], array[j]])
 			
+		for k in range(i):
+			currentSum = array[i] + array[k]
+			if currentSum not in sumsTable:
+				sumsTable[currentSum] = []
+			sumsTable[currentSum].append([array[i], array[k]])
+	return result
