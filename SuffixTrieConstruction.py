@@ -6,7 +6,7 @@ class SuffixTrie:
 
     def populateSuffixTrieFrom(self, string):
 		
-        for i in reversed(range(len(string))):
+        for i in range(len(string)):
 			current = self.root
 			for j in range(i,len(string)):
 				char = string[j]
